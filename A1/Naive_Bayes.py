@@ -43,8 +43,10 @@ eval_docs = all_docs[split_point:]
 eval_labels = all_labels[split_point:]
 
 
+
+
 # Task 1
-label_dist(all_labels)
+label_dist(train_labels)
 
 
 # Task 2
