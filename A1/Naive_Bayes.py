@@ -1,21 +1,24 @@
-import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
-
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+import time
+start_time = time.time()
 
 def read_documents(file):
     labels = []
     docs = []
     txt = open(file, encoding='UTF=8')
     for i in txt.readlines():
-        labels.append(i.lower().split()[:2])
-        docs.append(i.lower().split()[2:])
+        labels.append(i.lower().split()[1])
+        docs.append(i.lower().split(" ")[3:])
     return docs, labels
 
 
-def label_dist(all_labels):
+def label_dist(labels):
     temp_dict = {}
-    for i in all_labels:
+    for i in labels:
         if i[0] not in temp_dict.keys():
             temp_dict[i[0]] = 1
         else:
@@ -30,8 +33,26 @@ def label_dist(all_labels):
     plt.show()
 
 
+def matrixbuilder(docs):
+    # 8 000 rows by 40 000 columns
+    # Get a dictionary with all possible keys
+    keys = {}
+    for sample in docs:
+        for word in sample:
+            keys[word] = 0
+    matrix = []
+    for i in docs:
+        temp = keys.copy()
+        for j in i:
+            temp[j] += 1
+        matrix.append(list(temp.values()))
+    return matrix
+
+output = open("naive_bayes.txt", "w")
+
 # Task 0
 all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
+all_docs = matrixbuilder(all_docs)
 split_point = int(0.80*len(all_docs))
 
 # training 80%
@@ -43,11 +64,18 @@ eval_docs = all_docs[split_point:]
 eval_labels = all_labels[split_point:]
 
 
-
-
 # Task 1
-label_dist(train_labels)
+# label_dist(train_labels)
 
 
 # Task 2
 bayes = GaussianNB()
+pred_labels = bayes.fit(train_docs, train_labels).predict(eval_docs)
+
+# Task 3
+# tn, fp, fn, tp = confusion_matrix(eval_labels, pred_labels, labels=['pos', 'neg']).ravel()
+
+output.write("Accuracy: " + str(accuracy_score(eval_labels, pred_labels)) + "\n\n")
+output.write("Confusion matrix:\n" + str(confusion_matrix(eval_labels, pred_labels)) + "\n\n")
+output.write(str(classification_report(eval_labels, pred_labels)) + "\n")
+output.write("--- %s seconds ---" % (time.time() - start_time))
