@@ -82,7 +82,7 @@ pred_labels = bayes.fit(train_docs, train_labels).predict(eval_docs)
 # Task 3
 output.write("Accuracy: " + str(accuracy_score(eval_labels, pred_labels)) + "\n\n")
 output.write("Confusion matrix:\n" + str(confusion_matrix(eval_labels, pred_labels)) + "\n\n")
-output.write(str(classification_report(eval_labels, pred_labels)) + "\n")
+output.write("Classification\n" + str(classification_report(eval_labels, pred_labels)) + "\n")
 output.write("--- %s seconds ---" % (time.time() - start_time))
 
 
