@@ -7,6 +7,7 @@ import time
 start_time = time.time()
 
 def read_documents(file):
+    # Custom read documents
     labels = []
     docs = []
     txt = open(file, encoding='UTF=8')
@@ -17,13 +18,13 @@ def read_documents(file):
 
 
 def label_dist(labels):
+    # Distribution of positives and negatives plotted out on graph
     temp_dict = {}
     for i in labels:
         if i[0] not in temp_dict.keys():
             temp_dict[i[0]] = 1
         else:
             temp_dict[i[0]] += 1
-
     print(temp_dict)
 
     fig = plt.figure(figsize=(10, 7))
@@ -40,6 +41,7 @@ def matrixbuilder(docs):
     for sample in docs:
         for word in sample:
             keys[word] = 0
+    # Create a matrix with
     matrix = []
     for i in docs:
         temp = keys.copy()
@@ -48,11 +50,13 @@ def matrixbuilder(docs):
         matrix.append(list(temp.values()))
     return matrix
 
-output = open("naive_bayes.txt", "w")
+
+# Creating txt file
+output = open("naive_bayes-all_sentiment_shuffled.txt", "w")
 
 # Task 0
-all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
-all_docs = matrixbuilder(all_docs)
+docs, all_labels = read_documents('all_sentiment_shuffled.txt')
+all_docs = matrixbuilder(docs)
 split_point = int(0.80*len(all_docs))
 
 # training 80%
@@ -65,17 +69,24 @@ eval_labels = all_labels[split_point:]
 
 
 # Task 1
-# label_dist(train_labels)
+# Plotting the labels
+label_dist(all_labels)
 
 
 # Task 2
 bayes = GaussianNB()
 pred_labels = bayes.fit(train_docs, train_labels).predict(eval_docs)
 
-# Task 3
-# tn, fp, fn, tp = confusion_matrix(eval_labels, pred_labels, labels=['pos', 'neg']).ravel()
 
+# Task 3
 output.write("Accuracy: " + str(accuracy_score(eval_labels, pred_labels)) + "\n\n")
 output.write("Confusion matrix:\n" + str(confusion_matrix(eval_labels, pred_labels)) + "\n\n")
 output.write(str(classification_report(eval_labels, pred_labels)) + "\n")
 output.write("--- %s seconds ---" % (time.time() - start_time))
+
+
+# Task 4
+# There is no weight associated in positive words.
+for i, j, k in zip(eval_labels[:10], pred_labels[:10], docs[int(0.80*len(all_docs)):int(0.80*len(all_docs))+11]):
+    print("Eval: " + str(i) + "\t" + str(k))
+    print("Pred: " + str(j) + "\n")
