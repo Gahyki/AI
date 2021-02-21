@@ -1,33 +1,33 @@
 ****** Random forest results ******
-Accuracy: 0.8220730172052035
+Accuracy: 0.8250104909777591
 
 Confusion matrix:
-[[1000  230]
- [ 194  959]]
+[[1008  222]
+ [ 195  958]]
 
               precision    recall  f1-score   support
 
-           0       0.84      0.81      0.83      1230
+           0       0.84      0.82      0.83      1230
            1       0.81      0.83      0.82      1153
 
-    accuracy                           0.82      2383
-   macro avg       0.82      0.82      0.82      2383
-weighted avg       0.82      0.82      0.82      2383
+    accuracy                           0.83      2383
+   macro avg       0.82      0.83      0.82      2383
+weighted avg       0.83      0.83      0.83      2383
 
 ****** classic decision tree results ******
-Accuracy: 0.7196810742761225
+Accuracy: 0.7138061267310113
 
 Confusion matrix:
-[[890 340]
+[[876 354]
  [328 825]]
 
               precision    recall  f1-score   support
 
-           0       0.73      0.72      0.73      1230
-           1       0.71      0.72      0.71      1153
+           0       0.73      0.71      0.72      1230
+           1       0.70      0.72      0.71      1153
 
-    accuracy                           0.72      2383
-   macro avg       0.72      0.72      0.72      2383
-weighted avg       0.72      0.72      0.72      2383
+    accuracy                           0.71      2383
+   macro avg       0.71      0.71      0.71      2383
+weighted avg       0.71      0.71      0.71      2383
 
---- 12.74400806427002 seconds ---
+--- 12.255398988723755 seconds ---
