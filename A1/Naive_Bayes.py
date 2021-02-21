@@ -75,6 +75,7 @@ label_dist(all_labels)
 
 # Task 2
 bayes = GaussianNB()
+
 pred_labels = bayes.fit(train_docs, train_labels).predict(eval_docs)
 
 
