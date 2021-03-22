@@ -70,7 +70,7 @@ eval_labels = all_labels[split_point:]
 
 # Task 1
 # Plotting the labels
-label_dist(all_labels)
+# label_dist(all_labels)
 
 
 # Task 2
@@ -85,9 +85,11 @@ output.write("Confusion matrix:\n" + str(confusion_matrix(eval_labels, pred_labe
 output.write("Classification\n" + str(classification_report(eval_labels, pred_labels)) + "\n")
 output.write("--- %s seconds ---" % (time.time() - start_time))
 
+print("Eval: " + str(eval_labels[-2:]))
+print("Pred: " + str(pred_labels[-2:]))
 
 # Task 4
 # There is no weight associated in positive words.
-for i, j, k in zip(eval_labels[:10], pred_labels[:10], docs[int(0.80*len(all_docs)):int(0.80*len(all_docs))+11]):
-    print("Eval: " + str(i) + "\t" + str(k))
-    print("Pred: " + str(j) + "\n")
+# for i, j, k in zip(eval_labels[:10], pred_labels[:10], docs[int(0.80*len(all_docs)):int(0.80*len(all_docs))+11]):
+#     print("Eval: " + str(i) + "\t" + str(k))
+#     print("Pred: " + str(j) + "\n")
