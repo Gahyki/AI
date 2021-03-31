@@ -1,5 +1,6 @@
 import heapq
-
+import time
+import sys
 
 # Graph of nodes and options to take
 class Puzzle:
@@ -100,6 +101,7 @@ class Puzzle:
     def __le__(self, other):
         return self.heuristic <= other.heuristic
 
+
 class OpenList:
     # Min Priority Queue
     def __init__(self):
@@ -125,6 +127,7 @@ class OpenList:
                 return True
         return False
 
+
 def cost(puzzle):
     hsum = 0
     # Change to hamming distance
@@ -148,13 +151,16 @@ def astar(puzzle):
 
     # Cost of each possibility
     costlist = {}
+
     # Initializing cost list
     costlist[str(puzzle.puzzle)] = 0
 
     # List of considered possibilities
     searchlist = []
 
+
     # Main loop
+    starttime = time.time()
     while not openlist.isempty():
         # Current node to explore
         current = openlist.get()
@@ -165,6 +171,12 @@ def astar(puzzle):
         # Adding to closelists
         closelist.append(current[1])
         uniquecloselist[str(current[1].puzzle)] = None
+
+        if (time.time() - starttime) > 60:
+            closelist = ["no solution"]
+            searchlist = ["no solution"]
+            print("It took too long to solve...")
+            return closelist, searchlist
 
         # Compare with the goal
         if current[1].solved():
@@ -178,4 +190,4 @@ def astar(puzzle):
                     costlist[str(option.puzzle)] = new_cost
                     openlist.put(fscore, option)
                     searchlist.append(option)
-    return closelist, searchlist
+    return closelist, searchlist, max(costlist.values()), (time.time()-starttime)
