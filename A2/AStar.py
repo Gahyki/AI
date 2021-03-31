@@ -55,10 +55,9 @@ class Puzzle:
 
     def heuristics1(self):
         hsum = 0
-        # Change to hamming distance
         # Regular Hamming distance
         for i, v in enumerate(self.puzzle):
-            if v != 1 and v != i + 1:
+            if v != i + 1:
                 hsum += 1
         return hsum
 
@@ -128,16 +127,6 @@ class OpenList:
         return False
 
 
-def cost(puzzle):
-    hsum = 0
-    # Change to hamming distance
-    # Regular Hamming distance
-    for i, v in enumerate(puzzle):
-        if v != i + 1:
-            hsum += 1
-    return hsum
-
-
 def astar(puzzle):
     # List of different possibilities
     openlist = OpenList()
@@ -165,9 +154,6 @@ def astar(puzzle):
         # Current node to explore
         current = openlist.get()
 
-        # Removing possibilities from past traversals
-        openlist.elements = []
-
         # Adding to closelists
         closelist.append(current[1])
         uniquecloselist[str(current[1].puzzle)] = None
@@ -184,7 +170,7 @@ def astar(puzzle):
         else:
             # Getting each neighbor and its heuristic value
             for option in current[1].neighbors():
-                new_cost = costlist[str(current[1].puzzle)] + cost(option.puzzle)
+                new_cost = costlist[str(current[1].puzzle)] + 1
                 if str(option.puzzle) not in uniquecloselist.keys() or new_cost < costlist[str(option.puzzle)]:
                     fscore = new_cost + option.heuristic
                     costlist[str(option.puzzle)] = new_cost

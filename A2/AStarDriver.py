@@ -3,10 +3,10 @@ import time
 
 
 
-start = ((6, 1, 2), (7, 8, 3), (5, 4, 9))
+# start = ((6, 1, 2), (7, 8, 3), (5, 4, 9))
 # start = ((1, 2,  3),(4, 6, 5),(7, 8, 9))
-# start = ((1, 2, 3, 4, 5, 7, 14),(8, 9, 10, 11, 12, 13, 6),(15, 16, 17, 18, 19, 20, 21),(22, 23, 24, 25, 26, 27, 28),
-#          (29, 30, 31, 32, 49, 33, 34),(36, 37, 38, 39, 40, 41, 35),(43, 44, 45, 46, 47, 48, 42))
+start = ((1, 2, 3, 4, 5, 7, 14),(8, 9, 10, 11, 12, 13, 6),(15, 16, 17, 18, 19, 20, 21),(22, 23, 24, 25, 26, 27, 28),
+         (29, 30, 31, 32, 49, 33, 34),(36, 37, 38, 39, 40, 41, 35),(43, 44, 45, 46, 47, 48, 42))
 
 
 print("-------------------------- A* Algorithm -----------------------------")
@@ -39,8 +39,8 @@ T_cost += a_cost
 T_time += a_time
 
 
-print("Total length of solution path" + str(SOT_counter))
-print("Average length of solution path" + str(SOA_counter))
+print("Total length of solution path: " + str(SOT_counter))
+print("Average length of solution path: " + str(SOA_counter))
 
 print("Total length of search path: " + str(SET_counter))
 print("Average length of search path: " + str(SEA_counter))
