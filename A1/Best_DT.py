@@ -86,6 +86,7 @@ vect = CountVectorizer()
 vect.fit(docs_Results_Clean)
 x_train = vect.transform(docs_Results_Clean)
 x_test = vect.transform(eval_results_clean)
+x_train1 = vect.transform()
 
 # -------------- Random forest algorithm --------------------#
 randF = RandomForestClassifier()
@@ -100,6 +101,10 @@ output.write(str(classification_report(eval_labels_number, y_pred)) + "\n")
 clf = DecisionTreeClassifier(splitter='random')
 clf = clf.fit(x_train, train_labels_number)
 y_pred1 = clf.predict(x_test)
+review = ["I wanted to read this over the length of his presidency, but it never happened. It was a great read.Really helped me understand inner city life and the struggles of the black community.",
+          "I bought this for my mom. She is loving it. Also it was delivered a day earlier than promised. Amazon Prime is great. Keep up the good work"]
+x_train1 = vect.transform(review);
+yy_test = clf.predict(x_train1)
 # -------------- output printing --------------------#
 output.write("****** classic decision tree results ******" + "\n")
 output.write("Accuracy: " + str(metrics.accuracy_score(eval_labels_number, y_pred1)) + "\n\n")
@@ -107,11 +112,4 @@ output.write("Confusion matrix:\n" + str(confusion_matrix(eval_labels_number, y_
 output.write(str(classification_report(eval_labels_number, y_pred1)) + "\n")
 output.write("--- %s seconds ---" % (time.time() - start_time))
 
-for i in range(6):
-    print(y_pred1[i])
-print('\n')
-for i in range(6):
-    print(eval_labels_number[i])
-
-for i in range(6):
-    print(eval_results_clean[i])
+print(yy_test[0])
