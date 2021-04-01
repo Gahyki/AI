@@ -1,6 +1,7 @@
 import time
 import heapq
-import sys
+
+
 class Puzzle:
     def __init__(self, matrix):
         # current state of puzzle, xy location of each value
@@ -58,15 +59,16 @@ class Puzzle:
 
     def heuristics2(self):
         hsum = 0
-        # Manhattan Distance For Matrix
         for i, v in enumerate(self.puzzle):
             # Get starting position
             sx = i // self.size
             sy = i % self.size
+
             # Get ending position
             ex = (v - 1) // self.size
             ey = (v - 1) % self.size
-            # hsum += abs(ex - sx) + abs(ey - sy)
+
+            # Manhattan Distance For Matrix
             hsum += min(abs(ex - sx), self.size - 1 - abs(ex - sx)) \
                     + min(abs(ey - sy), self.size - 1 - abs(ey - sy))
         return hsum
@@ -94,77 +96,77 @@ class Puzzle:
         def __le__(self, other):
             return self.heuristic <= other.heuristic
 
-    class OpenList:
-        # Min Priority Queue
-        def __init__(self):
-            # List of all potential elements
-            self.elements = []
+class OpenList:
+    # Min Priority Queue
+    def __init__(self):
+        # List of all potential elements
+        self.elements = []
 
-        def put(self, heuristic_value, potential):
-            # Pushed into queue using heap
-            heapq.heappush(self.elements, (heuristic_value, potential))
+    def put(self, heuristic_value, potential):
+        # Pushed into queue using heap
+        heapq.heappush(self.elements, (heuristic_value, potential))
 
-        def get(self):
-            # returns only the potential element
-            # the heuristic value is not returned
-            return heapq.heappop(self.elements)
+    def get(self):
+        # returns only the potential element
+        # the heuristic value is not returned
+        return heapq.heappop(self.elements)
 
-        def isempty(self):
-            return not self.elements
+    def isempty(self):
+        return not self.elements
 
-        def checkinside(self, option):
-            # Method to check if neighbor is inside the MinPQ
-            for _, puzzle in self.elements:
-                if puzzle == option:
-                    return True
-            return False
+    def checkinside(self, option):
+        # Method to check if neighbor is inside the MinPQ
+        for _, puzzle in self.elements:
+            if puzzle == option:
+                return True
+        return False
 
-    def astar(puzzle):
-        # List of different possibilities
-        openlist = OpenList()
-        openlist.put(0, puzzle)
+def astar(puzzle):
+    # List of different possibilities
+    openlist = OpenList()
+    openlist.put(0, puzzle)
 
-        # Solution path
-        closelist = []
+    # Solution path
+    closelist = []
 
-        # Dictionary containing state of matrix in string form to find avoid repetition of actions
-        uniquecloselist = {}
+    # Dictionary containing state of matrix in string form to find avoid repetition of actions
+    uniquecloselist = {}
 
-        # Cost of each possibility
-        costlist = {}
+    # Cost of each possibility
+    costlist = {}
 
-        # Initializing cost list
-        costlist[str(puzzle.puzzle)] = 0
+    # Initializing cost list
+    costlist[str(puzzle.puzzle)] = 0
 
-        # List of considered possibilities
-        searchlist = []
+    # List of considered possibilities
+    searchlist = []
 
-        # Main loop
-        starttime = time.time()
-        while not openlist.isempty():
-            # Current node to explore
-            current = openlist.get()
+    # Main loop
+    starttime = time.time()
+    while not openlist.isempty():
+        # Current node to explore
+        current = openlist.get()
 
-            # Adding to closelists
-            closelist.append(current[1])
-            uniquecloselist[str(current[1].puzzle)] = None
+        # Adding to closelists
+        closelist.append(current[1])
+        uniquecloselist[str(current[1].puzzle)] = None
 
-            if (time.time() - starttime) > 60:
-                closelist = ["no solution"]
-                searchlist = ["no solution"]
-                print("It took too long to solve...")
-                return closelist, searchlist
+        if (time.time() - starttime) > 60:
+            closelist = ["no solution"]
+            searchlist = ["no solution"]
+            print("It took too long to solve...")
+            return closelist, searchlist
 
-            # Compare with the goal
-            if current[1].solved():
-                break
-            else:
-                # Getting each neighbor and its heuristic value
-                for option in current[1].neighbors():
-                    new_cost = costlist[str(current[1].puzzle)] + 1
-                    if str(option.puzzle) not in uniquecloselist.keys() or new_cost < costlist[str(option.puzzle)]:
-                        fscore = new_cost + option.heuristic
-                        costlist[str(option.puzzle)] = new_cost
-                        openlist.put(fscore, option)
-                        searchlist.append(option)
-        return closelist, searchlist, max(costlist.values()), (time.time() - starttime)
+        # Compare with the goal
+        if current[1].solved():
+            break
+        else:
+            # Getting each neighbor and its heuristic value
+            for option in current[1].neighbors():
+                new_cost = costlist[str(current[1].puzzle)] + 1
+                if str(option.puzzle) not in uniquecloselist.keys() or new_cost < costlist[str(option.puzzle)]:
+                    fscore = new_cost + option.heuristic
+                    costlist[str(option.puzzle)] = new_cost
+                    openlist.put(fscore, option)
+                    searchlist.append(option)
+    return closelist, searchlist, max(costlist.values()), (time.time() - starttime)
