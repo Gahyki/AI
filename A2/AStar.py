@@ -169,4 +169,10 @@ def astar(puzzle):
                     costlist[str(option.puzzle)] = new_cost
                     openlist.put(fscore, option)
                     searchlist.append(option)
+            uniquecloselist[str(current[1].puzzle)] = str(openlist.elements[0][1].puzzle)
+
+    if closelist[-1].puzzle != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+        closelist = ["no solution"]
+        searchlist = ["no solution"]
+
     return closelist, searchlist, max(costlist.values()), (time.time() - starttime)

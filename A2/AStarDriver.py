@@ -1,6 +1,4 @@
 from AStar import *
-import time
-
 
 
 print("-------------------------- A* Algorithm -----------------------------")
@@ -21,14 +19,14 @@ for line in f:
     puzzle = Puzzle(start)
     a_solution, a_search, a_cost, a_time = astar(puzzle)
 
-    SOT_counter += len(a_solution)
-    SET_counter += len(a_search)
-    for p in a_solution:
-        if p == "no solution":
-            NST_counter += 1
+    if "no solution" not in a_solution:
+        SOT_counter += len(a_solution)
+        SET_counter += len(a_search)
+    else:
+        NST_counter += 1
+
     T_cost += a_cost
     T_time += a_time
-
 
 # Initializing averages variables for stats
 SOA_counter = SOT_counter / nb_tests
