@@ -147,6 +147,8 @@ def astar(puzzle):
         # Current node to explore
         current = openlist.get()
 
+        print(current[1])
+
         # Adding to closelists
         closelist.append(current[1])
         uniquecloselist[str(current[1].puzzle)] = None
@@ -171,8 +173,11 @@ def astar(puzzle):
                     searchlist.append(option)
             uniquecloselist[str(current[1].puzzle)] = str(openlist.elements[0][1].puzzle)
 
-    if closelist[-1].puzzle != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
-        closelist = ["no solution"]
-        searchlist = ["no solution"]
+
+    # for i in searchlist:
+    #     print(i)
+    # if closelist[-1].puzzle != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+    #     closelist = ["no solution"]
+    #     searchlist = ["no solution"]
 
     return closelist, searchlist, max(costlist.values()), (time.time() - starttime)
