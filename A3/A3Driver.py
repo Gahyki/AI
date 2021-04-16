@@ -5,15 +5,17 @@ from A3Game import PNT
 def minmax(self, pnt, player, alpha, beta):
     if 7 in player.ls_taken_tokens:
         return pnt.remaining_tokens
+
     if player.depth % 2 == 0:
         maxEval = float("-inf")
-        for child in pnt.neighbors:
+        for child in pnt.neighbors():
             childEval = self.minmax(child, player.depth + 1, alpha, beta)
             maxEval = max(alpha, childEval)
             alpha = max(alpha, childEval)
             if beta <= alpha:
                 break
         return maxEval
+
     else:
         minEval = float("inf")
         for child in pnt.neighbors():
@@ -24,7 +26,7 @@ def minmax(self, pnt, player, alpha, beta):
                 break
         return minEval
 
-
+Player(10, 3, 4, [2, 6], 4)
 # pnt = PNT(7)
 # print(pnt.total_tokens)
 # print(pnt.ls_tokens)

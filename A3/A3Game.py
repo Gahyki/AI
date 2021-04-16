@@ -15,6 +15,7 @@ class PNT:
         for i in range(1, self.total_tokens):
             if i*number in self.all_tokens:
                 multiples.append(i)
+        return multiples
 
     def neighbors(self):
         all_neighbors = []
