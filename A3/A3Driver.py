@@ -1,17 +1,18 @@
 from A3Players import Player
 from A3Game import PNT
+import copy
 
 
 def minmax(self, pnt, player, alpha, beta):
     if 7 in player.ls_taken_tokens:
         return pnt.remaining_tokens # to be replaced
 
-    if player.depth % 2 == 0:
+    if pnt.depth % 2 == 0:
         maxEval = float("-inf")
         for child in pnt.neighbors():
             #Creating child game instance
-            node = pnt # deep copy
-            temp = player # deep copy
+            node = copy.deepcopy(pnt) # deep copy
+            temp = copy.deepcopy(player) # deep copy
             temp.take(node, child)
 
             childEval = self.minmax(node, player.depth + 1, alpha, beta)
@@ -32,15 +33,17 @@ def minmax(self, pnt, player, alpha, beta):
         return minEval
 
 
-max = Player()
-min = Player()
+
 # Player(10, 3, 4, [2, 6], 4)
 pnt = PNT(7)
+a = copy.deepcopy(pnt)
+# print(pnt.getmultiples(3))
+# print(pnt.getfactors(3))
+# print(pnt.neighbors())
+a.all_tokens.remove(3)
+print(a.all_tokens)
 print(pnt.all_tokens)
-print(pnt.getmultiples(3))
-print(pnt.getfactors(3))
-print(pnt.neighbors())
-minmax(max,)
+
 
 
 # requires input file
