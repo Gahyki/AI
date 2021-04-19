@@ -25,8 +25,13 @@ def minmax(self, pnt, player, alpha, beta):
             if beta <= alpha:
                 break
         return minEval
-
-Player(10, 3, 4, [2, 6], 4)
+#
+# Player(10, 3, 4, [2, 6], 4)
+a = PNT(7)
+print(a.all_tokens)
+print(a.getmultiples(3))
+print(a.getfactors(3))
+print(a.neighbors())
 # pnt = PNT(7)
 # print(pnt.total_tokens)
 # print(pnt.ls_tokens)
