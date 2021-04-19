@@ -47,4 +47,22 @@ print(pnt.all_tokens)
 
 
 # requires input file
+file = open("./testcase.txt")
+for i in file.readlines():
+    if "TakeTokens" in i:
+        raw_input = i.split()[1:]
+        input_numbers = []
+        temp = []
+        for j in range(len(raw_input)):
+            if j == (len(raw_input) - 1):
+                input_numbers.append(temp)
+                input_numbers.append(int(raw_input[j]))
+            elif j < 2:
+                input_numbers.append(int(raw_input[j]))
+            else:
+                temp.append(int(raw_input[j]))
+
+        # Input numbers are done formatting here
+        print(input_numbers)
+
 # requires output file
