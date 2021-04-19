@@ -5,3 +5,7 @@ class Player:
         self.ls_taken_tokens: [] = ls_taken_tokens
         # Even numbered depth will mean the play is Max
         self.depth: int = depth
+
+    def take(self, pnt, child):
+        self.ls_taken_tokens.append(child)
+        pnt.all_tokens.remove(child)

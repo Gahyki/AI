@@ -11,7 +11,6 @@ class PNT:
         for i in range(1, number + 1):
             if i == 1 and i in self.all_tokens:
                 factors.append(i)
-
             if i % number == 0 and i in self.all_tokens:
                 factors.append(i)
         return factors
@@ -30,7 +29,7 @@ class PNT:
                 if (i+1) % 2 == 1:
                     all_neighbors.append(i+1)
         else:
-            all_neighbors = list(set(self.getmultiples(self.recent_choice) + self.getfactors(self.recent_choice)))
+            all_neighbors = set(self.getmultiples(self.recent_choice) + self.getfactors(self.recent_choice))
         return all_neighbors
 
     def take_token(self, token_value, player):
