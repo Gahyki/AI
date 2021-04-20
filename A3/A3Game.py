@@ -1,8 +1,10 @@
 class PNT:
-    def __init__(self, total_tokens):
+    def __init__(self, total_tokens, nb_taken_tokens, ls_taken_tokens, depth):
         self.total_tokens: int = total_tokens
         self.all_tokens = [i+1 for i in range(self.total_tokens)]
-        self.depth = 0 # number of moves made
+        self.depth = depth # number of moves made
+        self.nb_taken_tokens: int = nb_taken_tokens
+        self.ls_taken_tokens: [] = ls_taken_tokens
         self.recent_choice = 0
 
     def getfactors(self, number):
@@ -32,18 +34,18 @@ class PNT:
             all_neighbors = set(self.getmultiples(self.recent_choice) + self.getfactors(self.recent_choice))
         return all_neighbors
 
-    def take_token(self, token_value, player):
+    def take_token(self, token_value):
         while token_value not in self.all_tokens:
             print("The token " + str(token_value) + " is already taken by a player.")
             token_value = input("Here are your choices:\n" + str(self.all_tokens) + "\nPlease select a new token: ")
 
         if self.depth % 2 == 0:
             print("Player MAX has successfully taken the token " + str(token_value) + ".")
-            player.ls_taken_tokens.append(token_value)
+            self.ls_taken_tokens.append(token_value)
             self.all_tokens.remove(token_value)
         else:
             print("Player MIN has successfully taken the token " + str(token_value) + ".")
-            player.ls_taken_tokens.append(token_value)
+            self.ls_taken_tokens.append(token_value)
             self.all_tokens.remove(token_value)
 
 
