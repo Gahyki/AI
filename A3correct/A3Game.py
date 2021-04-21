@@ -11,6 +11,7 @@ class Node:
         self.childList = childList
         self.pnt = pnt
 
+
 def getmultiples(checkNumber, numberToCompare):
     if checkNumber == 1:
         return True
@@ -19,6 +20,7 @@ def getmultiples(checkNumber, numberToCompare):
         return True
     else:
         return False
+
 
 def prime(number):
     if number > 1:
@@ -31,7 +33,8 @@ def prime(number):
                     return True
         else:
             return False
-            return False
+    return False
+
 
 def string(inputStr):
     array_of_values = inputStr.split();
@@ -39,7 +42,6 @@ def string(inputStr):
     allToken = int(array_of_values.pop(0))
 
     number_of_taken_tokens = int(array_of_values.pop(0))
-
 
     list_of_taken_tokens = []
     if number_of_taken_tokens != 0:
@@ -51,6 +53,7 @@ def string(inputStr):
     depth = int(array_of_values.pop(0))
 
     return allToken, number_of_taken_tokens, list_of_taken_tokens, depth
+
 
 def legalMoves(allToken, takenTokenNum, listofTakenToken):
     if takenTokenNum == 0:
@@ -64,6 +67,7 @@ def legalMoves(allToken, takenTokenNum, listofTakenToken):
                 possible_choices.append(num)
 
     return possible_choices
+
 
 def rootNode(allToken, listofTakenToken, takenTokenNum):
     depthNode = 0
@@ -79,6 +83,7 @@ def rootNode(allToken, listofTakenToken, takenTokenNum):
                                          treeRoot.listOfTakenToken)
 
     return treeRootChilder
+
 
 def addChildren(parentNode, takenTokenNum, allToken, listofTakenToken):
     move = legalMoves(allToken, takenTokenNum, listofTakenToken)
@@ -168,6 +173,7 @@ def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxD
 
         return value, move, nodeVisited, nodeEvaluated, maxDepth, brachingChildern
 
+
 def gameBoard(node): # 2.5 static board evalution
 
     if len(node.childList) == 0:
@@ -180,7 +186,6 @@ def gameBoard(node): # 2.5 static board evalution
     multiples = 1
     if node.maxPlayer == False:
         multiples = -1
-
 
     if 1 not in node.listOfTakenToken:
         return 0
@@ -203,8 +208,7 @@ def gameBoard(node): # 2.5 static board evalution
         else:
             return multiples * 0.7
 
-    if prime(lastchange) == False:
-
+    else:
         search = node.allToken
 
         while search > 0:

@@ -9,7 +9,7 @@ Number of Nodes Visited: 4
 Number of Nodes Evaluated: 2
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 1.5624999999963585e-05secs
+Execution Time: 3.1800000000005435e-05secs
 
 
 Test Case: 2
@@ -21,7 +21,7 @@ Number of Nodes Visited: 12
 Number of Nodes Evaluated: 7
 Max Depth Reached: 2
 Avg Effective Branching Factor: 0.9
-Execution Time: 5.5166999999967103e-05secs
+Execution Time: 0.00015079999999999955secs
 
 
 Test Case: 3
@@ -33,7 +33,7 @@ Number of Nodes Visited: 27
 Number of Nodes Evaluated: 15
 Max Depth Reached: 4
 Avg Effective Branching Factor: 1.0
-Execution Time: 0.00018191700000003141secs
+Execution Time: 0.00032200000000000284secs
 
 
 Test Case: 4
@@ -45,7 +45,7 @@ Number of Nodes Visited: 3
 Number of Nodes Evaluated: 1
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 6.874999999961773e-06secs
+Execution Time: 1.860000000000056e-05secs
 
 
 Test Case: 5
@@ -57,7 +57,7 @@ Number of Nodes Visited: 6
 Number of Nodes Evaluated: 3
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 1.587499999999853e-05secs
+Execution Time: 4.710000000000131e-05secs
 
 
 Test Case: 6
@@ -69,7 +69,7 @@ Number of Nodes Visited: 4
 Number of Nodes Evaluated: 2
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 1.1624999999959584e-05secs
+Execution Time: 3.119999999999512e-05secs
 
 
 Test Case: 7
@@ -81,7 +81,7 @@ Number of Nodes Visited: 6
 Number of Nodes Evaluated: 3
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 1.4457999999994975e-05secs
+Execution Time: 3.869999999999568e-05secs
 
 
 Test Case: 8
@@ -93,7 +93,7 @@ Number of Nodes Visited: 9
 Number of Nodes Evaluated: 6
 Max Depth Reached: 2
 Avg Effective Branching Factor: 1.0
-Execution Time: 4.333400000000598e-05secs
+Execution Time: 0.00010860000000000036secs
 
 
 Test Case: 9
@@ -105,7 +105,7 @@ Number of Nodes Visited: 2
 Number of Nodes Evaluated: 1
 Max Depth Reached: 1
 Avg Effective Branching Factor: 1.0
-Execution Time: 4.125000000021473e-06secs
+Execution Time: 9.099999999997999e-06secs
 
 
 Test Case: 10
@@ -117,4 +117,4 @@ Number of Nodes Visited: 9
 Number of Nodes Evaluated: 5
 Max Depth Reached: 3
 Avg Effective Branching Factor: 1.0
-Execution Time: 2.229200000003484e-05secs
+Execution Time: 4.200000000000037e-05secs
