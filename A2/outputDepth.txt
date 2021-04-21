@@ -1,0 +1,17 @@
+Solution found
+number of visited node
+277668
+Solution found
+number of visited node
+43260
+Solution found
+number of visited node
+15
+Solution found
+number of visited node
+115139
+Solution found
+number of visited node
+59872
+total running time 1617726227.026491
+average running time80886311.35132454

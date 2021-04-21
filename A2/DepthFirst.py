@@ -79,7 +79,7 @@ class Puzzle():
                 return False
 
             current_node = queue.pop(0)
-          #  print(current_node)
+           # print(current_node)
             visited.append(current_node)
             uniqueVisited[str(current_node.puzzle)] = None
 
