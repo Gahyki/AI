@@ -37,36 +37,36 @@ def prime(number):
 
 
 def string(inputStr):
-    array_of_values = inputStr.split();
+    valuesArr = inputStr.split();
 
-    allToken = int(array_of_values.pop(0))
+    allToken = int(valuesArr.pop(0))
 
-    number_of_taken_tokens = int(array_of_values.pop(0))
+    taken_tokensNum = int(valuesArr.pop(0))
 
     list_of_taken_tokens = []
-    if number_of_taken_tokens != 0:
+    if taken_tokensNum != 0: #Number of taken token exist
         index = 0
-        while index < number_of_taken_tokens:
-            list_of_taken_tokens.append(int(array_of_values.pop(0)))
+        while index < taken_tokensNum:
+            list_of_taken_tokens.append(int(valuesArr.pop(0)))
             index = index + 1
 
-    depth = int(array_of_values.pop(0))
+    depth = int(valuesArr.pop(0))
 
-    return allToken, number_of_taken_tokens, list_of_taken_tokens, depth
+    return allToken, taken_tokensNum, list_of_taken_tokens, depth
 
 
 def legalMoves(allToken, takenTokenNum, listofTakenToken):
     if takenTokenNum == 0:
-        range_of_numbers = list(range(1, (int)(allToken / 2 + 1)))
-        possible_choices = [num for num in range_of_numbers if num % 2 == 1]
+        numbersRange = list(range(1, (int)(allToken / 2 + 1)))
+        choices = [num for num in numbersRange if num % 2 == 1]
     else:
-        last_move = listofTakenToken[-1]
-        possible_choices = []
+        lastMove = listofTakenToken[-1]
+        choices = []
         for num in list(range(1, allToken + 1)):
-            if num not in listofTakenToken and getmultiples(num, last_move):
-                possible_choices.append(num)
+            if num not in listofTakenToken and getmultiples(num, lastMove):
+                choices.append(num)
 
-    return possible_choices
+    return choices
 
 
 def rootNode(allToken, listofTakenToken, takenTokenNum):
@@ -85,12 +85,12 @@ def rootNode(allToken, listofTakenToken, takenTokenNum):
     return treeRootChilder
 
 
-def addChildren(parentNode, takenTokenNum, allToken, listofTakenToken):
+def addChildren(parent, takenTokenNum, allToken, listofTakenToken):
     move = legalMoves(allToken, takenTokenNum, listofTakenToken)
 
     if len(move) > 0:
-        depthNode = parentNode.depthNode + 1
-        maxPlayerParent = not parentNode.maxPlayer
+        depthNode = parent.depthNode + 1
+        maxPlayerParent = not parent.maxPlayer
 
         for move in move:
 
@@ -100,14 +100,14 @@ def addChildren(parentNode, takenTokenNum, allToken, listofTakenToken):
 
             newMove.append(move)
 
-            childNode = Node(parentNode, maxPlayerParent, allToken, newMove, depthNode,
+            childNode = Node(parent, maxPlayerParent, allToken, newMove, depthNode,
                              [], move)
-            parentNode.childList.append(childNode)
+            parent.childList.append(childNode)
 
-    return parentNode
+    return parent
 
 def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxDepth,
-           brachingChildern):
+           branchingChildren):
     if node.parent is not None:
         childnode = addChildren(node, len(node.listOfTakenToken), node.allToken,
                                                      node.listOfTakenToken)
@@ -122,19 +122,19 @@ def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxD
             maxDepth = childnode.depthNode
 
         eN = gameBoard(childnode)
-        return eN, childnode.pnt, nodeVisited, nodeEvaluated, maxDepth, brachingChildern
+        return eN, childnode.pnt, nodeVisited, nodeEvaluated, maxDepth, branchingChildren
     if maxPlayer:
         value = -math.inf # math infini
 
-        brachingChildern = brachingChildern + len(childnode.childList)
+        branchingChildren = branchingChildren + len(childnode.childList)
         for child in childnode.childList:
             nodeVisited = nodeVisited + 1
 
             if child.depthNode > maxDepth:
                 maxDepth = child.depthNode
-            valueEval, move, nodeVisited, nodeEvaluated, maxDepth, brachingChildern = abAlgo(
+            valueEval, move, nodeVisited, nodeEvaluated, maxDepth, branchingChildren = abAlgo(
                 child, depth - 1, alpha, beta, False, nodeVisited, nodeEvaluated, maxDepth,
-                brachingChildern)
+                branchingChildren)
             value = max(value, valueEval)
             alpha = max(alpha, value)
 
@@ -145,12 +145,12 @@ def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxD
                 if child.pnt < move:
                     move = child.pnt
 
-        return value, move, nodeVisited, nodeEvaluated, maxDepth, brachingChildern
+        return value, move, nodeVisited, nodeEvaluated, maxDepth, branchingChildren
 
     else:
         value = math.inf
 
-        brachingChildern = brachingChildern + len(childnode.childList)
+        branchingChildren = branchingChildren + len(childnode.childList)
 
         for child in childnode.childList:
             nodeVisited = nodeVisited + 1
@@ -158,9 +158,9 @@ def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxD
             if child.depthNode > maxDepth:
                 maxDepth = child.depthNode
 
-            valueEval, move, nodeVisited, nodeEvaluated, maxDepth, brachingChildern =abAlgo (
+            valueEval, move, nodeVisited, nodeEvaluated, maxDepth, branchingChildren =abAlgo (
                 child, depth - 1, alpha, beta, True, nodeVisited, nodeEvaluated, maxDepth,
-                brachingChildern)
+                branchingChildren)
 
             value = min(value, valueEval)
             beta = min(beta, value)
@@ -171,7 +171,7 @@ def abAlgo(node, depth, alpha, beta, maxPlayer, nodeVisited, nodeEvaluated, maxD
                 if child.pnt < move:
                     move = child.pnt
 
-        return value, move, nodeVisited, nodeEvaluated, maxDepth, brachingChildern
+        return value, move, nodeVisited, nodeEvaluated, maxDepth, branchingChildren
 
 
 def gameBoard(node): # 2.5 static board evalution
